@@ -42,6 +42,19 @@ export interface UIStrings {
   emailError: string;
   termsError: string;
   detailsSaved: string;
+  progressLabel: string;
+  progressStep: (current: number, total: number, label: string) => string;
+  stepPlan: string;
+  stepDetails: string;
+  stepConfirm: string;
+  confirmHeading: string;
+  confirmIntro: string;
+  orderNumberLabel: string;
+  confirmName: string;
+  confirmEmail: string;
+  paymentPending: string;
+  upfrontOn: string;
+  upfrontOff: string;
 }
 
 export const COMPANY = "CloudBox";
@@ -90,6 +103,19 @@ export const STRINGS: Record<LocaleName, UIStrings> = {
     emailError: "Enter a valid email address.",
     termsError: "Please agree to the terms to continue.",
     detailsSaved: "Your details look good. The next step comes after this.",
+    progressLabel: "Checkout progress",
+    progressStep: (current, total, label) => `Step ${current} of ${total}: ${label}`,
+    stepPlan: "Plan",
+    stepDetails: "Details",
+    stepConfirm: "Confirmation",
+    confirmHeading: "Order confirmed",
+    confirmIntro: "This is a fictional order. Nothing has been charged.",
+    orderNumberLabel: "Order number",
+    confirmName: "Name",
+    confirmEmail: "Email",
+    paymentPending: "A payment step is not part of this demo yet. No card is charged.",
+    upfrontOn: "Yes, 10% off",
+    upfrontOff: "No upfront discount",
   },
   de: {
     skipToContent: "Zum Inhalt springen",
@@ -134,5 +160,18 @@ export const STRINGS: Record<LocaleName, UIStrings> = {
     emailError: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
     termsError: "Bitte stimmen Sie den Bedingungen zu, um fortzufahren.",
     detailsSaved: "Ihre Angaben sehen gut aus. Der nächste Schritt folgt danach.",
+    progressLabel: "Checkout-Fortschritt",
+    progressStep: (current, total, label) => `Schritt ${current} von ${total}: ${label}`,
+    stepPlan: "Plan",
+    stepDetails: "Angaben",
+    stepConfirm: "Bestätigung",
+    confirmHeading: "Bestellung bestätigt",
+    confirmIntro: "Dies ist eine fiktive Bestellung. Es wurde nichts berechnet.",
+    orderNumberLabel: "Bestellnummer",
+    confirmName: "Name",
+    confirmEmail: "E-Mail",
+    paymentPending: "Ein Zahlungsschritt ist in dieser Demo noch nicht enthalten. Es wird keine Karte belastet.",
+    upfrontOn: "Ja, 10 % Rabatt",
+    upfrontOff: "Kein Vorauszahlungsrabatt",
   },
 };

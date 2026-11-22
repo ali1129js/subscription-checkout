@@ -5,6 +5,8 @@ import { cleanup } from "@testing-library/react";
 afterEach(() => {
   cleanup();
   localStorage.clear();
+  sessionStorage.clear();
+  window.history.replaceState(null, "", "/");
   document.documentElement.removeAttribute("data-theme");
   document.documentElement.removeAttribute("data-motion");
   document.documentElement.removeAttribute("style");

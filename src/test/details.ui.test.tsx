@@ -42,8 +42,11 @@ describe("Details form", () => {
     expect(screen.queryByText(strings.nameError)).not.toBeInTheDocument();
     expect(screen.queryByText(strings.emailError)).not.toBeInTheDocument();
     expect(screen.queryByText(strings.termsError)).not.toBeInTheDocument();
-    expect(screen.getByRole("status")).toHaveTextContent(strings.detailsSaved);
+    expect(screen.getByRole("heading", { name: strings.confirmHeading })).toBeInTheDocument();
 
+    await user.click(screen.getByRole("button", { name: strings.back }));
+    expect(screen.getByRole("heading", { name: strings.detailsHeading })).toBeInTheDocument();
+    expect(screen.getByLabelText(strings.nameLabel)).toHaveValue("Ada Lovelace");
     await user.click(screen.getByRole("button", { name: strings.back }));
     expect(screen.getByRole("heading", { name: strings.planHeading })).toBeInTheDocument();
   });
