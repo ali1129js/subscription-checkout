@@ -143,3 +143,68 @@ textarea {
   margin-bottom: 0;
   color: var(--text-muted);
 }
+
+.plan-fieldset {
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.85rem 0.85rem;
+  border: 2px solid var(--control-border);
+  border-radius: 0.7rem;
+}
+.plan-fieldset legend {
+  padding: 0 0.35rem;
+  font-weight: 600;
+}
+.plan-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+.plan-option {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  cursor: pointer;
+}
+.plan-option input {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--cobalt);
+}
+.price-summary {
+  margin: 1rem 0 0.75rem;
+  padding: 0.85rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 0.7rem;
+  background: var(--bg);
+}
+.price-summary h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+.price-summary dl {
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.price-summary dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.price-summary dt {
+  font-weight: 500;
+}
+.price-summary dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+.price-total {
+  margin-top: 0.3rem;
+  padding-top: 0.45rem;
+  border-top: 2px solid var(--border);
+  font-weight: 700;
+}
+.fictional-note {
+  color: var(--text-muted);
+}

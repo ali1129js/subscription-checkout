@@ -1,4 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { PlanStep } from "./components/PlanStep";
+import { DEFAULT_PLAN } from "./domain/plan";
+import type { PlanConfig } from "./domain/pricing";
 import { useStoredState } from "./hooks/useStoredState";
 import { STRINGS } from "./lib/i18n";
 import {
@@ -28,6 +31,7 @@ export function App() {
     localeSchema,
     defaultLocale(),
   );
+  const [plan, setPlan] = useState<PlanConfig>(DEFAULT_PLAN);
   const reducedMotion = prefersReducedMotion();
   const strings = STRINGS[locale];
 
@@ -65,11 +69,7 @@ export function App() {
         </div>
       </header>
       <main id="main" className="app-main" tabIndex={-1}>
-        <section className="panel" aria-labelledby="intro-h">
-          <h2 id="intro-h">{strings.comingSoonHeading}</h2>
-          <p>{strings.comingSoonBody}</p>
-          <p>{strings.fictionalNote}</p>
-        </section>
+        <PlanStep plan={plan} onChange={setPlan} strings={strings} locale={locale} />
       </main>
     </div>
   );

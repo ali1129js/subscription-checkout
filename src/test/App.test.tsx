@@ -45,9 +45,7 @@ describe("App shell", () => {
     render(<App />);
     await user.click(screen.getByRole("button", { name: "DE" }));
     expect(document.documentElement.lang).toBe("de");
-    expect(
-      screen.getByRole("heading", { name: "Als Nächstes kommt die Planauswahl" }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Wählen Sie Ihren Plan" })).toBeInTheDocument();
     expect(localStorage.getItem(KEYS.locale)).toBe(JSON.stringify("de"));
     await user.click(screen.getByRole("button", { name: "EN" }));
     expect(
