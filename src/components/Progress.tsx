@@ -7,9 +7,10 @@ interface Props {
 }
 
 export function Progress({ step, strings }: Props) {
-  const labels = {
+  const labels: Record<typeof step, string> = {
     plan: strings.stepPlan,
     details: strings.stepDetails,
+    payment: strings.stepPayment,
     confirm: strings.stepConfirm,
   };
   const currentIndex = STEPS.indexOf(step);

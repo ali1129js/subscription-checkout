@@ -3,7 +3,7 @@ import { validateDetails, DEFAULT_DETAILS, type DetailsDraft } from "../domain/d
 import { DEFAULT_PLAN } from "../domain/plan";
 import { planConfigSchema, type PlanConfig } from "../domain/pricing";
 
-export const STEPS = ["plan", "details", "confirm"] as const;
+export const STEPS = ["plan", "details", "payment", "confirm"] as const;
 export type WizardStep = (typeof STEPS)[number];
 
 export const WIZARD_KEY = "subscription-checkout.v1.wizard";
@@ -12,6 +12,8 @@ export interface WizardState {
   step: WizardStep;
   plan: PlanConfig;
   details: DetailsDraft;
+  /** Set after a successful demo charge. Never stores card data. */
+  paymentCompleted?: boolean;
   orderNumber?: string;
 }
 
@@ -23,6 +25,7 @@ const wizardSchema = z.object({
     email: z.string(),
     termsAccepted: z.boolean(),
   }),
+  paymentCompleted: z.boolean().optional(),
   orderNumber: z.string().min(1).optional(),
 });
 
@@ -34,7 +37,7 @@ export const DEFAULT_WIZARD: WizardState = {
 
 export function parseStepParam(search: string): WizardStep | null {
   const step = new URLSearchParams(search.startsWith("?") ? search.slice(1) : search).get("step");
-  if (step === "plan" || step === "details" || step === "confirm") return step;
+  if (step === "plan" || step === "details" || step === "payment" || step === "confirm") return step;
   return null;
 }
 
@@ -44,13 +47,19 @@ export function searchWithStep(step: WizardStep, search = ""): string {
   return `?${params.toString()}`;
 }
 
-/** Drop confirm if the details are not valid. Keep a generated order number only on confirm. */
+/**
+ * Payment and confirm require valid details. Confirm also requires a successful
+ * demo payment. Card data is never part of this state.
+ */
 export function normalizeWizard(state: WizardState): WizardState {
   const detailsOk = validateDetails(state.details).ok;
+  const paid = detailsOk && state.paymentCompleted === true;
   let step = state.step;
-  if (step === "confirm" && !detailsOk) step = "details";
+  if ((step === "payment" || step === "confirm") && !detailsOk) step = "details";
+  else if (step === "confirm" && !paid) step = "payment";
   const next: WizardState = { step, plan: state.plan, details: state.details };
-  if (detailsOk && state.orderNumber) next.orderNumber = state.orderNumber;
+  if (paid) next.paymentCompleted = true;
+  if (paid && state.orderNumber) next.orderNumber = state.orderNumber;
   return next;
 }
 
@@ -65,6 +74,7 @@ export function readWizard(): WizardState {
       plan: parsed.data.plan,
       details: parsed.data.details,
     };
+    if (parsed.data.paymentCompleted) rawState.paymentCompleted = true;
     if (parsed.data.orderNumber) rawState.orderNumber = parsed.data.orderNumber;
     return normalizeWizard(rawState);
   } catch {
@@ -92,7 +102,7 @@ export function makeOrderNumber(details: DetailsDraft, plan: PlanConfig, now: Da
 }
 
 export function ensureOrderNumber(state: WizardState, now: Date): WizardState {
-  if (state.step !== "confirm") return state;
+  if (state.step !== "confirm" || !state.paymentCompleted) return state;
   if (state.orderNumber) return state;
   const detailsOk = validateDetails(state.details);
   if (!detailsOk.ok) return state;

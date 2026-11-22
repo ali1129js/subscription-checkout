@@ -42,7 +42,7 @@ describe("Details form", () => {
     expect(screen.queryByText(strings.nameError)).not.toBeInTheDocument();
     expect(screen.queryByText(strings.emailError)).not.toBeInTheDocument();
     expect(screen.queryByText(strings.termsError)).not.toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: strings.confirmHeading })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: strings.paymentHeading })).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: strings.back }));
     expect(screen.getByRole("heading", { name: strings.detailsHeading })).toBeInTheDocument();

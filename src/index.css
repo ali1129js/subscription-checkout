@@ -339,3 +339,25 @@ textarea {
 .payment-pending {
   font-weight: 600;
 }
+.demo-banner {
+  display: inline-block;
+  margin: 0 0 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border: 2px solid var(--control-border);
+  border-radius: 0.4rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.test-cards {
+  color: var(--text-muted);
+}
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+@media (max-width: 32rem) {
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+}

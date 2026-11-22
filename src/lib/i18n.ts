@@ -46,6 +46,7 @@ export interface UIStrings {
   progressStep: (current: number, total: number, label: string) => string;
   stepPlan: string;
   stepDetails: string;
+  stepPayment: string;
   stepConfirm: string;
   confirmHeading: string;
   confirmIntro: string;
@@ -55,6 +56,19 @@ export interface UIStrings {
   paymentPending: string;
   upfrontOn: string;
   upfrontOff: string;
+  paymentHeading: string;
+  paymentIntro: string;
+  paymentDemoLabel: string;
+  paymentTestCards: string;
+  panLabel: string;
+  expiryLabel: string;
+  cvcLabel: string;
+  payNow: string;
+  paying: string;
+  panError: string;
+  expiryError: string;
+  cvcError: string;
+  declinedError: string;
 }
 
 export const COMPANY = "CloudBox";
@@ -107,15 +121,31 @@ export const STRINGS: Record<LocaleName, UIStrings> = {
     progressStep: (current, total, label) => `Step ${current} of ${total}: ${label}`,
     stepPlan: "Plan",
     stepDetails: "Details",
+    stepPayment: "Payment",
     stepConfirm: "Confirmation",
     confirmHeading: "Order confirmed",
     confirmIntro: "This is a fictional order. Nothing has been charged.",
     orderNumberLabel: "Order number",
     confirmName: "Name",
     confirmEmail: "Email",
-    paymentPending: "A payment step is not part of this demo yet. No card is charged.",
+    paymentPending: "This was a simulated demo payment. No card was charged or stored.",
     upfrontOn: "Yes, 10% off",
     upfrontOff: "No upfront discount",
+    paymentHeading: "Demo payment",
+    paymentIntro:
+      "This is a fake card form for the CloudBox demo. Nothing is sent to a server, no card data is stored, and nothing is charged.",
+    paymentDemoLabel: "Demo only. No real payment.",
+    paymentTestCards:
+      "Test cards: 4242 4242 4242 4242 succeeds. 4000 0000 0000 0002 is declined.",
+    panLabel: "Card number",
+    expiryLabel: "Expiry (MM/YY)",
+    cvcLabel: "CVC",
+    payNow: "Pay (demo)",
+    paying: "Processing…",
+    panError: "Enter a valid card number.",
+    expiryError: "Enter a valid expiry date in MM/YY.",
+    cvcError: "Enter a 3 or 4 digit CVC.",
+    declinedError: "This test card was declined.",
   },
   de: {
     skipToContent: "Zum Inhalt springen",
@@ -164,14 +194,30 @@ export const STRINGS: Record<LocaleName, UIStrings> = {
     progressStep: (current, total, label) => `Schritt ${current} von ${total}: ${label}`,
     stepPlan: "Plan",
     stepDetails: "Angaben",
+    stepPayment: "Zahlung",
     stepConfirm: "Bestätigung",
     confirmHeading: "Bestellung bestätigt",
     confirmIntro: "Dies ist eine fiktive Bestellung. Es wurde nichts berechnet.",
     orderNumberLabel: "Bestellnummer",
     confirmName: "Name",
     confirmEmail: "E-Mail",
-    paymentPending: "Ein Zahlungsschritt ist in dieser Demo noch nicht enthalten. Es wird keine Karte belastet.",
+    paymentPending: "Dies war eine simulierte Demo-Zahlung. Es wurde keine Karte belastet oder gespeichert.",
     upfrontOn: "Ja, 10 % Rabatt",
     upfrontOff: "Kein Vorauszahlungsrabatt",
+    paymentHeading: "Demo-Zahlung",
+    paymentIntro:
+      "Dies ist ein gefälschtes Kartenformular für die CloudBox-Demo. Es wird nichts an einen Server gesendet, keine Kartendaten gespeichert und nichts berechnet.",
+    paymentDemoLabel: "Nur Demo. Keine echte Zahlung.",
+    paymentTestCards:
+      "Testkarten: 4242 4242 4242 4242 wird akzeptiert. 4000 0000 0000 0002 wird abgelehnt.",
+    panLabel: "Kartennummer",
+    expiryLabel: "Ablauf (MM/JJ)",
+    cvcLabel: "CVC",
+    payNow: "Zahlen (Demo)",
+    paying: "Wird verarbeitet…",
+    panError: "Bitte eine gültige Kartennummer eingeben.",
+    expiryError: "Bitte ein gültiges Ablaufdatum im Format MM/JJ eingeben.",
+    cvcError: "Bitte eine 3- oder 4-stellige CVC eingeben.",
+    declinedError: "Diese Testkarte wurde abgelehnt.",
   },
 };

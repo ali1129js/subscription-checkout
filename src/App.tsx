@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ConfirmStep } from "./components/ConfirmStep";
 import { DetailsStep } from "./components/DetailsStep";
+import { PaymentStep } from "./components/PaymentStep";
 import { PlanStep } from "./components/PlanStep";
 import { Progress } from "./components/Progress";
 import type { DetailsDraft } from "./domain/details";
@@ -32,11 +33,11 @@ import { MotionToggle } from "./theme/MotionToggle";
 import { ThemeSwitcher } from "./theme/ThemeSwitcher";
 import { applyMotion, applyTheme, prefersReducedMotion } from "./theme/themes";
 
-function loadInitialWizard(): WizardState {
+function loadInitialWizard(now: Date): WizardState {
   const stored = readWizard();
   const urlStep = parseStepParam(window.location.search);
   const merged = normalizeWizard(urlStep ? { ...stored, step: urlStep } : stored);
-  return ensureOrderNumber(merged, new Date());
+  return ensureOrderNumber(merged, now);
 }
 
 function syncUrl(step: WizardStep, mode: "push" | "replace") {
@@ -45,7 +46,12 @@ function syncUrl(step: WizardStep, mode: "push" | "replace") {
   else window.history.replaceState({ step }, "", url);
 }
 
-export function App() {
+interface AppProps {
+  now?: Date;
+  paymentDelayMs?: number;
+}
+
+export function App({ now, paymentDelayMs = 600 }: AppProps) {
   const [theme, setTheme] = useStoredState<ThemeName>(KEYS.theme, themeSchema, defaultTheme());
   const [motion, setMotion] = useStoredState<MotionName>(
     KEYS.motion,
@@ -57,12 +63,13 @@ export function App() {
     localeSchema,
     defaultLocale(),
   );
-  const [wizard, setWizard] = useState<WizardState>(() => loadInitialWizard());
+  const clock = now ?? new Date();
+  const [wizard, setWizard] = useState<WizardState>(() => loadInitialWizard(clock));
   const reducedMotion = prefersReducedMotion();
   const strings = STRINGS[locale];
 
   function commit(next: WizardState, historyMode: "push" | "replace" | "none") {
-    const resolved = ensureOrderNumber(normalizeWizard(next), new Date());
+    const resolved = ensureOrderNumber(normalizeWizard(next), clock);
     writeWizard(resolved);
     if (historyMode !== "none") syncUrl(resolved.step, historyMode);
     setWizard(resolved);
@@ -147,8 +154,17 @@ export function App() {
             details={wizard.details}
             onChange={setDetails}
             onBack={() => go("plan")}
-            onContinue={() => go("confirm")}
+            onContinue={() => go("payment")}
             strings={strings}
+          />
+        )}
+        {wizard.step === "payment" && (
+          <PaymentStep
+            onBack={() => go("details")}
+            onSuccess={() => commit({ ...wizard, paymentCompleted: true, step: "confirm" }, "push")}
+            strings={strings}
+            now={clock}
+            delayMs={paymentDelayMs}
           />
         )}
         {wizard.step === "confirm" && wizard.orderNumber && (
@@ -156,7 +172,7 @@ export function App() {
             plan={wizard.plan}
             details={wizard.details}
             orderNumber={wizard.orderNumber}
-            onBack={() => go("details")}
+            onBack={() => go("payment")}
             strings={strings}
             locale={locale}
           />
