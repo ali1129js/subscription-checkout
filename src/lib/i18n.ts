@@ -31,6 +31,17 @@ export interface UIStrings {
   priceDiscount: string;
   priceTotal: string;
   priceLive: string;
+  continue: string;
+  back: string;
+  detailsHeading: string;
+  detailsIntro: string;
+  nameLabel: string;
+  emailLabel: string;
+  termsLabel: string;
+  nameError: string;
+  emailError: string;
+  termsError: string;
+  detailsSaved: string;
 }
 
 export const COMPANY = "CloudBox";
@@ -68,6 +79,17 @@ export const STRINGS: Record<LocaleName, UIStrings> = {
     priceDiscount: "Upfront discount",
     priceTotal: "Total",
     priceLive: "Live price summary",
+    continue: "Continue",
+    back: "Back",
+    detailsHeading: "Your details",
+    detailsIntro: "We only use these in this browser for the demo checkout. Nothing is sent to a server.",
+    nameLabel: "Full name",
+    emailLabel: "Email",
+    termsLabel: "I agree to the fictional terms of this demo",
+    nameError: "Enter your name.",
+    emailError: "Enter a valid email address.",
+    termsError: "Please agree to the terms to continue.",
+    detailsSaved: "Your details look good. The next step comes after this.",
   },
   de: {
     skipToContent: "Zum Inhalt springen",
@@ -101,5 +123,16 @@ export const STRINGS: Record<LocaleName, UIStrings> = {
     priceDiscount: "Vorauszahlungsrabatt",
     priceTotal: "Gesamt",
     priceLive: "Aktuelle Preisübersicht",
+    continue: "Weiter",
+    back: "Zurück",
+    detailsHeading: "Ihre Angaben",
+    detailsIntro: "Diese Angaben bleiben für den Demo-Checkout in diesem Browser. Es wird nichts an einen Server gesendet.",
+    nameLabel: "Vollständiger Name",
+    emailLabel: "E-Mail",
+    termsLabel: "Ich stimme den fiktiven Bedingungen dieser Demo zu",
+    nameError: "Bitte geben Sie Ihren Namen ein.",
+    emailError: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+    termsError: "Bitte stimmen Sie den Bedingungen zu, um fortzufahren.",
+    detailsSaved: "Ihre Angaben sehen gut aus. Der nächste Schritt folgt danach.",
   },
 };

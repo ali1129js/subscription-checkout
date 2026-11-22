@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { DetailsStep } from "./components/DetailsStep";
 import { PlanStep } from "./components/PlanStep";
+import { DEFAULT_DETAILS, type DetailsDraft } from "./domain/details";
 import { DEFAULT_PLAN } from "./domain/plan";
 import type { PlanConfig } from "./domain/pricing";
 import { useStoredState } from "./hooks/useStoredState";
@@ -32,6 +34,8 @@ export function App() {
     defaultLocale(),
   );
   const [plan, setPlan] = useState<PlanConfig>(DEFAULT_PLAN);
+  const [details, setDetails] = useState<DetailsDraft>(DEFAULT_DETAILS);
+  const [step, setStep] = useState<"plan" | "details">("plan");
   const reducedMotion = prefersReducedMotion();
   const strings = STRINGS[locale];
 
@@ -69,7 +73,23 @@ export function App() {
         </div>
       </header>
       <main id="main" className="app-main" tabIndex={-1}>
-        <PlanStep plan={plan} onChange={setPlan} strings={strings} locale={locale} />
+        {step === "plan" ? (
+          <PlanStep
+            plan={plan}
+            onChange={setPlan}
+            strings={strings}
+            locale={locale}
+            onContinue={() => setStep("details")}
+          />
+        ) : (
+          <DetailsStep
+            details={details}
+            onChange={setDetails}
+            onBack={() => setStep("plan")}
+            onContinue={() => setStep("details")}
+            strings={strings}
+          />
+        )}
       </main>
     </div>
   );

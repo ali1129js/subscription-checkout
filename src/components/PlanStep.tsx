@@ -7,9 +7,10 @@ interface Props {
   onChange: (plan: PlanConfig) => void;
   strings: UIStrings;
   locale: LocaleName;
+  onContinue: () => void;
 }
 
-export function PlanStep({ plan, onChange, strings, locale }: Props) {
+export function PlanStep({ plan, onChange, strings, locale, onContinue }: Props) {
   const price = pricePlan(plan);
   return (
     <section className="panel plan-step" aria-labelledby="plan-heading">
@@ -97,6 +98,11 @@ export function PlanStep({ plan, onChange, strings, locale }: Props) {
         </dl>
       </div>
       <p className="fictional-note">{strings.fictionalNote}</p>
+      <div className="step-actions">
+        <button type="button" className="button" onClick={onContinue}>
+          {strings.continue}
+        </button>
+      </div>
     </section>
   );
 }

@@ -208,3 +208,55 @@ textarea {
 .fictional-note {
   color: var(--text-muted);
 }
+
+.step-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+.button {
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  padding: 0.35rem 1rem;
+  border: 2px solid var(--cobalt-to);
+  border-radius: 0.6rem;
+  background-color: var(--cobalt);
+  background-image: linear-gradient(to bottom, var(--cobalt-from), var(--cobalt-to));
+  color: var(--on-cobalt);
+  font-weight: 600;
+  cursor: pointer;
+}
+.button-secondary {
+  background-color: var(--surface);
+  background-image: none;
+  color: var(--text);
+  border-color: var(--control-border);
+}
+.field {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0 0 0.9rem;
+}
+.field label {
+  font-weight: 600;
+}
+.field input[type="text"],
+.field input[type="email"] {
+  min-height: 2.75rem;
+  padding: 0.35rem 0.7rem;
+  border: 2px solid var(--control-border);
+  border-radius: 0.5rem;
+  background: var(--bg);
+  color: var(--text);
+}
+.field-error {
+  margin: 0;
+  color: var(--danger, #e37a7a);
+  font-size: 0.95rem;
+}
+
+.details-saved {
+  margin: 0 0 0.75rem;
+  font-weight: 600;
+}
