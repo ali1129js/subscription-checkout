@@ -1,0 +1,145 @@
+@import "./styles/gloss.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg, #1e2329);
+  color: var(--text, #e8ecf1);
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -4rem;
+  z-index: 10;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--on-cobalt);
+  background: var(--cobalt);
+}
+.skip-link:focus {
+  top: 0.5rem;
+}
+
+.app {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+}
+
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.app-title {
+  margin: 0;
+  font-size: 1.75rem;
+  letter-spacing: 0.01em;
+}
+.app-sub {
+  margin: 0.25rem 0 0;
+  color: var(--text-muted);
+}
+.app-main:focus {
+  outline: none;
+}
+
+.theme-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.segmented {
+  display: inline-flex;
+  border: 2px solid var(--control-border);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.segmented.wrap {
+  flex-wrap: wrap;
+  border-radius: 0.75rem;
+}
+.segment {
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  padding: 0.25rem 0.9rem;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.segment + .segment {
+  border-left: 2px solid var(--control-border);
+}
+.segmented.wrap .segment + .segment {
+  border-left: 0;
+}
+.segment[aria-pressed="true"] {
+  font-weight: 700;
+  background-color: var(--cobalt);
+  background-image: linear-gradient(to bottom, var(--cobalt-from), var(--cobalt-to));
+  color: var(--on-cobalt);
+}
+.segment:focus-visible {
+  outline-offset: -3px;
+}
+
+.panel {
+  border: 2px solid var(--border);
+  border-radius: 0.85rem;
+  padding: 1.25rem 1.25rem 1.4rem;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+.panel h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+}
+.panel p {
+  margin: 0 0 0.75rem;
+  max-width: 40rem;
+}
+.panel p:last-child {
+  margin-bottom: 0;
+  color: var(--text-muted);
+}

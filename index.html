@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Subscription checkout for the fictional product CloudBox Storage. This is a demo; no payment is taken."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>CloudBox Storage</title>
+    <script>
+      (function () {
+        try {
+          var theme = JSON.parse(
+            localStorage.getItem("subscription-checkout.v1.theme") || '"graphite"',
+          );
+          if (theme !== "khaki" && theme !== "graphite" && theme !== "midnight") theme = "graphite";
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme === "khaki" ? "light" : "dark";
+          var locale = JSON.parse(localStorage.getItem("subscription-checkout.v1.locale") || '"en"');
+          if (locale === "de" || locale === "en") document.documentElement.lang = locale;
+        } catch (e) {
+          document.documentElement.dataset.theme = "graphite";
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
