@@ -75,7 +75,7 @@
     0 8px 18px -6px rgb(42 36 24 / 0.28);
 }
 
-:root,
+:root:not([data-theme]),
 [data-theme="graphite"] {
   color-scheme: dark;
   --bg: #1e2329;
